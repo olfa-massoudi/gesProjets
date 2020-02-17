@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProjetController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello ! ✅</h1>
+    <table>
+    <tr>
+    	<td>nom </td>
+    	<td>description</td>
+    </tr>
+{% for p in projets%}
+	<tr>
+    	<td>{{p.nom}}</td>
+    	<td>{{p.description}}</td>
+    </tr>
+   
+{% endfor %}
+</table>
+   
+    
+</div>
+{% endblock %}
