@@ -36,6 +36,11 @@ class Projet
      */
     private $nom;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="projets")
+     */
+    private $categorie;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,6 +90,18 @@ class Projet
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }
