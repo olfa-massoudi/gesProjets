@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,6 +42,23 @@ class Projet
      * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="projets")
      */
     private $categorie;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Equipe", inversedBy="YES")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $equipe;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Tache", mappedBy="projet")
+     */
+   private $taches ;
+
+   public function __construct()
+   {
+       $this->taches = new ArrayCollection();
+   }
+
 
     public function getId(): ?int
     {
@@ -105,4 +124,49 @@ class Projet
 
         return $this;
     }
+
+    public function getEquipe(): ?equipe
+    {
+        return $this->equipe;
+    }
+
+    public function setEquipe(?equipe $equipe): self
+    {
+        $this->equipe = $equipe;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tache[]
+     */
+    public function getTaches(): Collection
+    {
+        return $this->taches;
+    }
+
+    public function addTach(Tache $tach): self
+    {
+        if (!$this->taches->contains($tach)) {
+            $this->taches[] = $tach;
+            $tach->setProjet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTach(Tache $tach): self
+    {
+        if ($this->taches->contains($tach)) {
+            $this->taches->removeElement($tach);
+            // set the owning side to null (unless already changed)
+            if ($tach->getProjet() === $this) {
+                $tach->setProjet(null);
+            }
+        }
+
+        return $this;
+    }
+
+   
 }

@@ -2,28 +2,26 @@
 
 namespace App\Form;
 
-use App\Entity\Projet;
+use App\Entity\Tache;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProjetType extends AbstractType
+class TacheType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('date_debut')
-            ->add('date_fin')
-            ->add('description')
             ->add('nom')
-            ->add('id_p')
+            ->add('etat')
+            ->add('projet')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Projet::class,
+            'data_class' => Tache::class,
         ]);
     }
 }

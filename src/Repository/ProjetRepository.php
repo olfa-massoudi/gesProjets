@@ -47,4 +47,35 @@ class ProjetRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findByNom($value)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.nom like :val')
+            ->setParameter('val', "%$value%")
+            ->getQuery()
+            ->getResult()
+        ;
+
+    }
+     public function findByDateDebut($value): ?Projet
+    {
+
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.date_debut = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+     public function findByDateFin($value): ?Projet
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.date_fin = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 }
